@@ -3,9 +3,9 @@ from flask import Flask, render_template, request, jsonify
 from PIL import Image
 
 try:
-    from .yolomodel import yolo  
-except:
     from yolomodel import yolo  
+except:
+    from .yolomodel import yolo  
 
 # Configuración de rutas
 base_dir = os.path.abspath(os.path.dirname(__file__))
