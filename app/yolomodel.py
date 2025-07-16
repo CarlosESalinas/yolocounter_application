@@ -26,14 +26,14 @@ cloud_dir = os.getenv("S3_BUCKET_URL")
 filename = "yolov7_training.onnx"
 
 # Intentar cargar local o descargar desde S3
-try:
-    yolopath = os.path.join(local_dir, filename)
-    with open(yolopath):
-        print('Cargando archivo local:', filename)
-except:
-    yolopath = os.path.join('/tmp', filename)
-    urllib.request.urlretrieve(cloud_dir + filename, yolopath)
-    print('Descargado desde S3:', filename)
+# try:
+yolopath = os.path.join(local_dir, filename)
+with open(yolopath):
+    print('Cargando archivo local:', filename)
+# except:
+#     yolopath = os.path.join('/tmp', filename)
+#     urllib.request.urlretrieve(cloud_dir + filename, yolopath)
+#     print('Descargado desde S3:', filename)
 
 # Instancia del modelo
 yolo = YoloOnnx(weigths_path=yolopath, class_names=class_names, cuda=False)
