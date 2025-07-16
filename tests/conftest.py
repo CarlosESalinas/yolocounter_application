@@ -28,23 +28,13 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
 sys.path.insert(0, parent_dir)
 
-with patch("app.yolomodel.YoloOnnx") as MockYolo:
-    mock_instance = MagicMock()
-    mock_instance.inference.return_value = (None, [], {})
-    mock_instance.class_names = ['person']
-    mock_instance.convertbox.return_value = []
-    MockYolo.return_value = mock_instance
-    
+# Importar la aplicación
+try:
     from app.application import application as app
-
-# # Importar la aplicación
-# try:
-#     from app.application import application as app
-# except ImportError:
-#     # Fallback si el import directo no funciona
-#     sys.path.insert(0, os.path.join(parent_dir, 'yolocounter'))
-#     from app.application import application as app
-
+except ImportError:
+    # Fallback si el import directo no funciona
+    sys.path.insert(0, os.path.join(parent_dir, 'yolocounter'))
+    from app.application import application as app
 
 @pytest.fixture
 def client():
