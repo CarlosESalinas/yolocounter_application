@@ -13,6 +13,7 @@ def test_yolo_detection_app():
     # Configurar opciones del navegador
     chrome_options = Options()
     # chrome_options.add_argument("--headless")  # Descomenta para ejecutar sin GUI
+    driver = None  
     
     try:
         # Inicializar el driver
