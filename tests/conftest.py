@@ -36,6 +36,21 @@ except ImportError:
     sys.path.insert(0, os.path.join(parent_dir, 'yolocounter'))
     from app.application import application as app
 
+@pytest.fixture(scope="session", autouse=True)
+def prevent_yolo_initialization():
+    """
+    Impide la carga real del modelo YOLO durante la importación,
+    reemplazando YoloOnnx por un mock antes de que se importe 'yolo'.
+    """
+    with patch("app.yolomodel.YoloOnnx") as MockYolo:
+        mock_instance = MagicMock()
+        mock_instance.inference.return_value = (None, [], {})
+        mock_instance.class_names = ['person']
+        mock_instance.convertbox.return_value = []
+        MockYolo.return_value = mock_instance
+        yield
+
+
 @pytest.fixture
 def client():
     """Cliente de prueba para Flask"""
