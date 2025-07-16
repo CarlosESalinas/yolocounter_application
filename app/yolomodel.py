@@ -21,7 +21,7 @@ class_names = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'tra
  'hair drier', 'toothbrush']
 
 # Ruta local y en la nube
-# local_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+local_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 cloud_dir = os.getenv("S3_BUCKET_URL")
 filename = "yolov7_training.onnx"
 
