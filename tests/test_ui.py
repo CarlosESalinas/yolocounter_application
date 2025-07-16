@@ -185,8 +185,15 @@ def test_yolo_detection_app():
         
     finally:
         print("Cerrando el navegador...")
-        driver.quit()
+        if driver is not None:
+            try:
+                driver.quit()
+            except Exception as e:
+                print(f"Error al cerrar el navegador: {e}")
+        else:
+            print("El navegador no fue inicializado.")
         print("Prueba finalizada.")
+
 
 def test_api_endpoint_directly():
     """Prueba adicional: verificar que el endpoint /detect-count funciona"""
